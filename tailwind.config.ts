@@ -6,13 +6,42 @@ const config: Config = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  safelist: [
+
+    {
+      pattern: /bg-(red|green|blue|orange)-(100|150|200)/,
+    },
+    {
+      pattern: /fill-(red|green|blue|orange)-(100|150|200)/,
+    },
+  ],
   theme: {
     extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-      },
+      colors: {
+        'primary': '#334155',
+        'secondary': "#64748B",
+        blue: {
+          50: "#E4FAFF",
+          150: "#8082FF",
+        },
+        orange: {
+          150: "#F4A76F",
+        },
+        green: {
+          150: "#57D2A9",
+        },
+        pink: {
+          150: "#D4009B",
+
+        },
+
+        gray: {
+          50: "#F3F4F4",
+          150: "#E9ECEF",
+        },
+
+      }
+    
     },
   },
   plugins: [],
