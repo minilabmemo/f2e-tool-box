@@ -71,7 +71,18 @@ export default function TaiwanMapFixed({ year, reverse, mapPath }: { year: strin
               }
             });
           }
-
+          // 定義箭頭
+          svg
+            .append('defs')
+            .append('marker')
+            .attr('id', 'arrowhead')
+            .attr('refX', 6) // 箭頭相對於端點的水平位移
+            .attr('refY', 3) // 箭頭相對於端點的垂直位移
+            .attr('markerWidth', 8) // 箭頭寬度
+            .attr('markerHeight', 6) // 箭頭高度
+            .attr('orient', 'auto') // 根據連接的線段自動調整箭頭方向
+            .append('path')
+            .attr('d', 'M0,0 L6,3 L0,6') // 箭頭的路徑，這裡使用一個簡單的三角形
           svg
             .selectAll('path')
             .data(taiwanGeoJSON)
@@ -87,6 +98,7 @@ export default function TaiwanMapFixed({ year, reverse, mapPath }: { year: strin
             })
             .attr('stroke', 'white')
             .attr('stroke-width', 2)
+            .style('marker-end', 'url(#arrowhead)') // 將箭頭應用到路徑的末端
             .on('click', (event, data) => {
               const keyToFind: string = data.properties.COUNTYNAME; // Ensure keyToFind is of type string
               const vote = res.get(data.properties.COUNTYNAME);
