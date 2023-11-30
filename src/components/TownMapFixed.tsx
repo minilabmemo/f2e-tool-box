@@ -29,11 +29,16 @@ function calcScale() {
 }
 
 
-export default function TaiwanMapFixed({ year, reverse, mapPath, area }: { year: string, reverse: boolean, mapPath: string, area?: string }) {
+export default function TownMapFixed({ year, reverse, mapPath, area }: { year: string, reverse: boolean, mapPath: string, area?: string }) {
   const mapRef = useRef<HTMLDivElement | null>(null);
   const hasFetchedData = useRef(false); // 新增一個 ref 來追蹤是否已經獲取過數據
 
   let mercatorScale = calcScale();
+
+  if (area) {
+    mercatorScale = 12000;
+  }
+
   useEffect(() => {
     const width = (mapRef.current)?.offsetWidth || 0;
     console.log("🚀 ~ file: TaiwanMapFixed.tsx:35 ~ useEffect ~ width:", width)
@@ -60,7 +65,15 @@ export default function TaiwanMapFixed({ year, reverse, mapPath, area }: { year:
       fetch(mapPath)
         .then(response => response.json())
         .then(data => {
-          const taiwanGeoJSON: GeoJSONFeature[] = data.features;
+          const alltaiwanGeoJSON = area
+            ? { type: 'FeatureCollection', features: data.features.filter(d => [area].includes(d.properties.COUNTYNAME)) }
+            : { type: 'FeatureCollection', features: data.features };
+
+          const taiwanGeoJSON: GeoJSONFeature[] = area
+            ? data.features.filter(d => [area].includes(d.properties.COUNTYNAME))
+            : data.features;
+
+
           if (reverse) {
             taiwanGeoJSON.forEach(feature => {
               feature.geometry.coordinates.reverse(); // 使用 reverse 在第一层级上反转
@@ -70,6 +83,32 @@ export default function TaiwanMapFixed({ year, reverse, mapPath, area }: { year:
                 });
               }
             });
+          }
+          let xOffset = 0;
+          let yOffset = 0;
+
+          if (area) {
+            //找出圖型的邊界經緯度
+            const bounds = d3.geoPath().bounds(alltaiwanGeoJSON);
+
+            const [minX, minY] = projection(bounds[0]);
+            const [maxX, maxY] = projection(bounds[1]);
+            const areaWidth = maxX - minX;  //可以計算出大小
+            const areaHeight = maxY - minY;
+            const areaPercent = areaWidth / width;
+            console.log("🚀 ~ file: TaiwanMap.tsx:91 ~ useEffect ~ areaPercent:", areaPercent)
+
+            // 計算圖形經緯度的中心點
+            const centerX = (bounds[0][0] + bounds[1][0]) / 2;  //121
+            const centerY = (bounds[0][1] + bounds[1][1]) / 2;
+            const hcenter = 121
+            const wcenter = 24
+            //使用 D3 的地理投影 (projection) 將地理坐標轉換為屏幕坐標  121－> 250 (svg 寬 500)
+            const centerScreenCoordinates = projection([hcenter, wcenter]);
+            const mapHCoordinates = projection([centerX, centerY]);
+            // 計算圖形到中心點距離 進行位移
+            xOffset = centerScreenCoordinates[0] - mapHCoordinates[0]
+            yOffset = centerScreenCoordinates[1] - mapHCoordinates[1]
           }
           // 定義箭頭
           svg
@@ -88,17 +127,19 @@ export default function TaiwanMapFixed({ year, reverse, mapPath, area }: { year:
             .data(taiwanGeoJSON)
             .enter()
             .append('path')
+            .attr('transform', `translate(${xOffset}, ${yOffset})`)
             .attr('d', (d: any) => pathGenerator(d.geometry)!)
+
             .attr('id', (d: any) => 'city' + d.properties.COUNTYCODE)
             .attr('name', (d: any) => 'city' + d.properties.COUNTYNAME)
-            .attr('class', (d: any) => {
-              const select = res.get(d.properties.COUNTYNAME);
-              const color = `fill-${select?.value.winner.color || "gray-200"}`;
-              return color
-            })
-            .attr('stroke', 'white')
-            .attr('stroke-width', 2)
-            .style('marker-end', 'url(#arrowhead)') // 將箭頭應用到路徑的末端
+            // .attr('class', (d: any) => {
+            //   const select = res.get(d.properties.COUNTYNAME) || "fill-gray-200";
+            //   const color = `fill-${select?.value.winner.color || "gray-200"}`;
+            //   return color
+            // })
+            // .attr('stroke', 'white')
+            // .attr('stroke-width', 1)
+            // .style('marker-end', 'url(#arrowhead)') // 將箭頭應用到路徑的末端
             .on('click', (event, data) => {
               const keyToFind: string = data.properties.COUNTYNAME; // Ensure keyToFind is of type string
               const vote = res.get(data.properties.COUNTYNAME);
@@ -109,15 +150,17 @@ export default function TaiwanMapFixed({ year, reverse, mapPath, area }: { year:
           svg
             .selectAll('text')
             .data(taiwanGeoJSON)
+
             .enter()
             .append('text')
+            .attr('transform', `translate(${xOffset}, ${yOffset})`)
             .attr('x', (d: any) => pathGenerator.centroid(d.geometry)[0])
             .attr('y', (d: any) => pathGenerator.centroid(d.geometry)[1])
-            .text((d: any) => d.properties.COUNTYNAME)
+            .text((d: any) => d.properties.TOWNNAME)
             .attr('text-anchor', 'middle')
             .attr('alignment-baseline', 'middle')
-            .attr('class', 'text-base font-bold font-inter w-[28px] h-[20px] outlined-text  text-white')
-            .style("fill", "white")
+            .attr('class', 'text-xs font-inter w-[28px] h-[20px] text-blue-500 ')
+            .style("fill", "blue")
 
 
 
