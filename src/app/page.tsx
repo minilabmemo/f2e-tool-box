@@ -18,6 +18,7 @@ export default function Home() {
             <ul className="list-disc ml-4">
               <li><Link href={`/showcase/graph`}>graph</Link></li>
               <li><Link href={`/showcase/map`}>map</Link></li>
+              <li><Link href={`/showcase/waterfall`}>waterfall - Masonry layout</Link></li>
             </ul>
           </li>
           <li className="mb-2">cheat sheet
