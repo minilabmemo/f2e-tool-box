@@ -27,6 +27,13 @@ export default function Home() {
               <li><Link href={`/cheat_sheet/grid`}>grid</Link></li>
             </ul>
           </li>
+          <li className="mb-2">react hook
+            <ul className="list-disc ml-4">
+              <li><Link href={`/react/simple`}>simple /useState </Link></li>
+              <li><Link href={`/react/useEffect`}>useEffect</Link></li>
+
+            </ul>
+          </li>
         </ul>
 
 

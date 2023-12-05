@@ -35,10 +35,15 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
+---
 
------------------------------
 ## Node
- nvm use v20.9.0 for 'next@14.0.3',
+
+nvm use v20.9.0 for 'next@14.0.3',
 Now using node v20.9.0 (npm v10.1.0)
 $ node -v
 v20.9.0
+
+## plugin
+
+- [Code snippets for JavaScript in ES3/5/6+ syntax](https://marketplace.visualstudio.com/items?itemName=NicholasHsiang.vscode-javascript-snippet)
