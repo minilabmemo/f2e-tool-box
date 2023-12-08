@@ -10,16 +10,16 @@ import TownMapFixed from "@/components/TownMapFixed";
 export default function Page() {
   return <>
     <div className="flex flex-col ">
-      <h1 className="text-lg font-bold">地區 D3 實作  <span> -> </span>
+      <h1 className="text-lg font-bold">地區 D3 實作  <span> - </span>
 
-        <div >初版地圖 geojson 正常 => 我重新縮放製作 geojson 放大到離島 問題 出現正方塊？？ </div></h1>
+        <div >初版地圖 geojson 正常 = 我重新縮放製作 geojson 放大到離島 問題 出現正方塊？？ </div></h1>
       <div className="">
 
         <div>taiwan.geojson 57KB  初版地圖正常「忘記縮放比了」 |COUNTY.geojson 76 kb「忘記縮放比了」重新製作異常：透過反轉正常修復，「後面版本都有離島資料」  </div>
         <div> 又製作另個 COUNTY_1.json(35KB 0.1% ) 又出現問題 部分正常部分異常？.... !!!!????</div>
         <div> 又製作另個 COUNTY_2.json(50KB 0.01% ) 又正常....? 但這版有點太簡化了 不知道為什麼檔案也偏大？測試 0.03 以下會正常 </div>
         <div> 又製作另個 COUNTY_3.json(75KB 0.08% ) 重新設定 setting  prevent remove 要勾不然會消失，0.08% 正常 </div>
-        <div> 結論：後來製作的還是都要反轉，至於設定先以第三版為主去選，符合我要的大小。 ->設定  <a href="/mapshaper.png" className="href">mapshaper</a></div>
+        <div> 結論：後來製作的還是都要反轉，至於設定先以第三版為主去選，符合我要的大小。 -設定  <a href="/mapshaper.png" className="href">mapshaper</a></div>
         <div> 圖片工具的好處是可以修改自己要的邊緣，可是目前看來是有轉換問題未解，也看過有人把 D3 path 存起來直接用，暫時將上面 COUNTY_3 生成 svg 存起來備用  <a href="/tw.svg" className="href">tw.svg,</a> 但壞處是不能調整邊緣。 </div>
         <div className="flex flex-wrap">
           <div className="w-[250px]">

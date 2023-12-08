@@ -115,10 +115,10 @@ export default function Page() {
       <h1 className="text-lg font-bold"> flex 排版：內容小於容器   justify-content: center; 搭配 margin + wrap+ 子容器設置 flex1</h1>
       <div className="w-[1000px] h-[100px] bg-blue-300 flex justify-center flex-wrap">
         <div className="w-[500px] h-[30px] bg-red-300  mx-4 flex-1">
-          div w-500  mx-4(16px) flex-1(flex: 1 1 0%;) => w-468
+          div w-500  mx-4(16px) flex-1(flex: 1 1 0%;) = w-468
         </div>
         <div className="w-1/2 h-[40px] bg-red-300 mx-4 flex-1" >
-          div w/1/2  mx-4(16px) flex-1 => w-468
+          div w/1/2  mx-4(16px) flex-1 = w-468
         </div>
       </div>
       <div className="text-s  "> 1000px  flex justify-center flex-wrap + flex-1,  </div>
@@ -134,10 +134,10 @@ export default function Page() {
       <h1 className="text-lg font-bold"> flex 排版：流體佈局：解決自動寬度 用 flex-1 解決</h1>
       <div className="w-full h-[100px] bg-blue-300 flex justify-center flex-wrap ">
         <div className="h-[30px] bg-red-300  m-4 p-1 flex-1 ">
-          div m-4(16px) flex-1(flex: 1 1 0%;) => 不用設定寬度 寬度＋margin+padding 會佔據一半
+          div m-4(16px) flex-1(flex: 1 1 0%;) = 不用設定寬度 寬度＋margin+padding 會佔據一半
         </div>
         <span className="h-[40px] bg-red-300 m-4  p-1 flex-1" >
-        span m-4(16px) flex-1(flex: 1 1 0%;) => 不用設定寬度 寬度＋margin+padding 會佔據一半
+          span m-4(16px) flex-1(flex: 1 1 0%;) = 不用設定寬度 寬度＋margin+padding 會佔據一半
         </span>
       </div>
       <div className="text-s  "> 父寬 1504px 子 devMode 只到上面顯示 720px 是內容大小，實際大小是 712+4*2+16*2=752px 剛好佔據一半，就自動計算了，只不過 flex-wrap 沒效果。 </div>
@@ -149,10 +149,10 @@ export default function Page() {
       <h1 className="text-lg font-bold"> flex 排版：流體佈局 + 高度問題 </h1>
       <div className="w-full h-[100px]  bg-blue-300 flex justify-center flex-col md:flex-row ">
         <div className="h-[30px] bg-red-300  m-4 p-1 flex-1 ">
-          div m-4(16px) flex-1(flex: 1 1 0%;) => 不用設定寬度 寬度＋margin+padding 會佔據一半
+          div m-4(16px) flex-1(flex: 1 1 0%;) = 不用設定寬度 寬度＋margin+padding 會佔據一半
         </div>
         <span className="h-[40px] bg-red-300 m-4  p-1 flex-1" >
-        span m-4(16px) flex-1(flex: 1 1 0%;) => 不用設定寬度 寬度＋margin+padding 會佔據一半
+          span m-4(16px) flex-1(flex: 1 1 0%;) = 不用設定寬度 寬度＋margin+padding 會佔據一半
         </span>
       </div>
       <div className="text-s  "> 設定手機為直排 大螢幕為橫排，原本容器高度固定不會有問題，但用手機看直排空間會不夠而超出去重疊再一起。 </div>
@@ -163,12 +163,12 @@ export default function Page() {
       <h1 className="text-lg font-bold"> flex 排版：流體佈局 + 解決手機高度超出問題 </h1>
       <div className="w-full   bg-blue-300 flex justify-center flex-col md:flex-row ">
         <div className="h-1/2 bg-red-300  m-4 p-1 flex-1 ">
-          div m-4(16px) flex-1(flex: 1 1 0%;) => 不用設定寬度 寬度＋margin+padding 會佔據一半
+          div m-4(16px) flex-1(flex: 1 1 0%;) = 不用設定寬度 寬度＋margin+padding 會佔據一半
         </div>
         <span className="h-1/2 bg-red-300 m-4  p-1 flex-1" >
-        span m-4(16px) flex-1(flex: 1 1 0%;) => 不用設定寬度 寬度＋margin+padding 會佔據一半
-        span m-4(16px) flex-1(flex: 1 1 0%;) => 不用設定寬度 寬度＋margin+padding 會佔據一半
-        span m-4(16px) flex-1(flex: 1 1 0%;) => 不用設定寬度 寬度＋margin+padding 會佔據一半
+          span m-4(16px) flex-1(flex: 1 1 0%;) = 不用設定寬度 寬度＋margin+padding 會佔據一半
+          span m-4(16px) flex-1(flex: 1 1 0%;) = 不用設定寬度 寬度＋margin+padding 會佔據一半
+          span m-4(16px) flex-1(flex: 1 1 0%;) = 不用設定寬度 寬度＋margin+padding 會佔據一半
         </span>
       </div>
       <div className="text-s  "> 上述的父容器不要設定高度，可是父容器不設高度，子容器設置高度 h-1/2 會失效 </div>
@@ -180,10 +180,10 @@ export default function Page() {
       <h1 className="text-lg font-bold"> flex 排版：流體佈局 + margin 改成 gap </h1>
       <div className="w-full   bg-blue-300 flex justify-center flex-col md:flex-row gap-2 p-4">
         <div className="h-1/2 bg-red-300  p-1 flex-1 ">
-          div m-4(16px) flex-1(flex: 1 1 0%;) => 不用設定寬度 寬度＋margin+padding 會佔據一半
+          div m-4(16px) flex-1(flex: 1 1 0%;) = 不用設定寬度 寬度＋margin+padding 會佔據一半
         </div>
         <span className="h-1/2 bg-red-300   p-1 flex-1" >
-        span m-4(16px) flex-1(flex: 1 1 0%;) => 不用設定寬度 寬度＋margin+padding 會佔據一半
+          span m-4(16px) flex-1(flex: 1 1 0%;) = 不用設定寬度 寬度＋margin+padding 會佔據一半
         </span>
       </div>
       <div className="text-s  "> 子容器不設置 margin 父容器設定 gap-2 取代，父容器再加上點 padding，形如不同效果的間格，這樣不會讓中間間距變成兩倍 margin 大小，更符合設計。 </div>

@@ -81,7 +81,7 @@ function MyComponent() {
   return (
     <>
       <div>
-        {console.log('render')}
+        {/* {()=>console.log('render')} */}
         {data ? (
           <p>Data received: {JSON.stringify(data)}</p>
         ) : (
@@ -162,7 +162,7 @@ function Life() {
   return (
 
     <div>
-      {console.log("render", count)}
+      {/* {console.log("render", count)} */}
       <button onClick={() => setCount((prev) => prev + 1)}>
         Clicked {count} times
       </button>
@@ -201,7 +201,8 @@ function Life1() {
   return (
 
     <div>
-      {console.log("render", count)}
+      {/* {console.log("render", count)}  //Type error: Type 'void' is not assignable to type 'ReactNode'. 雖然可以運作 但是 compile error */}
+
       <button onClick={() => setCount((prev) => prev + 1)}>
         Clicked {count} times
       </button>
@@ -223,7 +224,7 @@ function Life2() {
   return (
 
     <div>
-      {console.log("render", count)}
+      {/* {console.log("render", count)} */}
       <button onClick={() => setCount((prev) => prev + 1)}>
         Clicked {count} times
       </button>
@@ -246,7 +247,7 @@ function Life3() {
   return (
 
     <div>
-      {console.log("render", count)}
+      {/* {console.log("render", count)} */}
       <button onClick={() => setCount((prev) => prev + 1)}>
         Clicked {count} times
       </button>
