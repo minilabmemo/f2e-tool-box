@@ -29,9 +29,9 @@ export default function Home() {
           </li>
           <li className="mb-2">react hook
             <ul className="list-disc ml-4">
-              <li><Link href={`/react/simple`}>simple /useState </Link></li>
+              <li><Link href={`/react/simple`}>simple /useState /useRef</Link></li>
               <li><Link href={`/react/useEffect`}>useEffect</Link></li>
-
+              <li><Link href={`/react/useHooks`}>useHooks</Link></li>
             </ul>
           </li>
         </ul>
