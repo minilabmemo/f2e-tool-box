@@ -144,12 +144,12 @@ function Life() {
     };
   });
 
-  useEffect(() => {
-    console.log("這裡會在每次掛載後都執行", count)
-    return () => {
-      console.log("清理函數：每次掛載前")
-    };
-  }, []);
+  // useEffect(() => {
+  //   console.log("這裡會在每次掛載後都執行", count)
+  //   return () => {
+  //     console.log("清理函數：每次掛載前")
+  //   };
+  // }, []); //build failed 
 
   useEffect(() => {
     console.log("這裡會在每次渲染後 count 值與上次不一樣時執行", count)
@@ -214,12 +214,12 @@ function Life1() {
 function Life2() {
   // console.log(" Life2 ")
   const [count, setCount] = useState(0);
-  useEffect(() => {
-    console.log("這裡會只會在掛載後執行", count)
-    return () => {
-      console.log("清理函數", count)
-    };
-  }, []);
+  // useEffect(() => {
+  //   console.log("這裡會只會在掛載後執行", count)
+  //   return () => {
+  //     console.log("清理函數", count)
+  //   };
+  // }, []);//build failed
 
   return (
 

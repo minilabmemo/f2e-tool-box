@@ -20,11 +20,11 @@ interface GeoJSONFeature {
 }
 
 function calcScale() {
-  let mercatorScale, w = window.screen.width;
-  if (w > 1366) { mercatorScale = 11000; }
-  else if (w <= 1366 && w > 480) { mercatorScale = 9000; }
-  else { mercatorScale = 6000; }
-  // mercatorScale = 1000;
+  // let mercatorScale, w = window.screen.width;
+  // if (w > 1366) { mercatorScale = 11000; }
+  // else if (w <= 1366 && w > 480) { mercatorScale = 9000; }
+  // else { mercatorScale = 6000; }
+  let mercatorScale = 1000;
   return mercatorScale;
 }
 

@@ -3,28 +3,34 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
 import { calcKeyVoteWinCity } from '../utility/city';
+
 interface GeoJSONProperties {
   COUNTYCODE: string;
   COUNTYNAME: string;
   COUNTYENG: string;
 }
 
+
+interface GeoJSON {
+  type: 'Point' | 'MultiPoint' | 'LineString' | 'MultiLineString' | 'Polygon' | 'MultiPolygon';
+  features: GeoJSONFeature[];
+}
+
+interface GeoJSONFeature {
+  type: 'Point' | 'MultiPoint' | 'LineString' | 'MultiLineString' | 'Polygon' | 'MultiPolygon';
+  properties: GeoJSONProperties;
+  geometry: GeoJSONGeometry;
+}
 interface GeoJSONGeometry {
   type: string;
   coordinates: number[][][] | number[][][][];
 }
-
-interface GeoJSONFeature {
-  properties: GeoJSONProperties;
-  geometry: GeoJSONGeometry;
-}
-
 function calcScale() {
-  let mercatorScale, w = window.screen.width;
-  if (w > 1366) { mercatorScale = 11000; }
-  else if (w <= 1366 && w > 480) { mercatorScale = 9000; }
-  else { mercatorScale = 6000; }
-  mercatorScale = 5000;
+  // let mercatorScale, w = window.screen.width;
+  // if (w > 1366) { mercatorScale = 11000; }
+  // else if (w <= 1366 && w > 480) { mercatorScale = 9000; }
+  // else { mercatorScale = 6000; }
+  let mercatorScale = 5000;
   return mercatorScale;
 }
 
@@ -65,12 +71,12 @@ export default function TownMapFixed({ year, reverse, mapPath, area }: { year: s
       fetch(mapPath)
         .then(response => response.json())
         .then(data => {
-          const alltaiwanGeoJSON = area
-            ? { type: 'FeatureCollection', features: data.features.filter(d => [area].includes(d.properties.COUNTYNAME)) }
-            : { type: 'FeatureCollection', features: data.features };
+          const alltaiwanGeoJSON: GeoJSON = area
+            ? { type: data.type, features: data.features.filter((d: GeoJSONFeature) => [area].includes(d.properties.COUNTYNAME)) }
+            : { type: data.type, features: data.features };
 
           const taiwanGeoJSON: GeoJSONFeature[] = area
-            ? data.features.filter(d => [area].includes(d.properties.COUNTYNAME))
+            ? data.features.filter((d: { properties: { COUNTYNAME: string; }; }) => [area].includes(d.properties.COUNTYNAME))
             : data.features;
 
 
@@ -89,10 +95,13 @@ export default function TownMapFixed({ year, reverse, mapPath, area }: { year: s
 
           if (area) {
             //找出圖型的邊界經緯度
-            const bounds = d3.geoPath().bounds(alltaiwanGeoJSON);
 
-            const [minX, minY] = projection(bounds[0]);
-            const [maxX, maxY] = projection(bounds[1]);
+
+            const bounds = d3.geoPath().bounds(alltaiwanGeoJSON as d3.GeoPermissibleObjects);
+
+
+            const [minX, minY] = projection(bounds[0]) || [0, 0];
+            const [maxX, maxY] = projection(bounds[1]) || [0, 0];
             const areaWidth = maxX - minX;  //可以計算出大小
             const areaHeight = maxY - minY;
             const areaPercent = areaWidth / width;
@@ -107,8 +116,11 @@ export default function TownMapFixed({ year, reverse, mapPath, area }: { year: s
             const centerScreenCoordinates = projection([hcenter, wcenter]);
             const mapHCoordinates = projection([centerX, centerY]);
             // 計算圖形到中心點距離 進行位移
-            xOffset = centerScreenCoordinates[0] - mapHCoordinates[0]
-            yOffset = centerScreenCoordinates[1] - mapHCoordinates[1]
+            if (centerScreenCoordinates != null && mapHCoordinates != null) {
+              xOffset = centerScreenCoordinates[0] - mapHCoordinates[0]
+              yOffset = centerScreenCoordinates[1] - mapHCoordinates[1]
+            }
+
           }
           // 定義箭頭
           svg
