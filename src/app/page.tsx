@@ -19,6 +19,7 @@ export default function Home() {
               <li><Link href={`/showcase/graph`}>graph</Link></li>
               <li><Link href={`/showcase/map`}>map</Link></li>
               <li><Link href={`/showcase/waterfall`}>waterfall - Masonry layout</Link></li>
+              <li><Link href={`/showcase/carousel`}>carousel</Link></li>
             </ul>
           </li>
           <li className="mb-2">cheat sheet

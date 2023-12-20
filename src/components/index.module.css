@@ -1,0 +1,41 @@
+.carousel{
+  width: 1000px;
+  overflow: hidden;
+  position: relative;
+  background-color: red
+}
+.container{
+  transform: translate3d(0,0,0);
+  transition-duration: 1s;
+  transition-property: all;
+  transition-timing-function: ease;
+  position: relative;
+  height: 100px;
+}
+.items {
+  width: 50%;
+  flex-shrink: 0;
+  position: absolute;
+  background-color: blue;
+  top: 0;
+}
+.buttonLeft {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  width: 30px;
+  height: 30px;
+  background: #fff;
+}
+.buttonRight {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  width: 30px;
+  height: 30px;
+  background: #fff;
+}
