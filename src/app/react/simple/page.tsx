@@ -18,14 +18,33 @@ function CustomButton() {
 
 
 export default function App() {
+  console.log("🚀 ~ file: page.tsx:21 ~ App ~ App:") //count1＆count2 雖然更變其中一個 state 會重新進來印 log 且"整體渲染“[debug mode 可以發現] 但另一個不會被重置為 0 
+  let [count1, setCount1] = useState(0);//應該可以想成只有掛載時才會被設定為 0，有其他 state 改變不會影響它
+  let [count2, setCount2] = useState(0);
+
+  function handleClick() {
+    setCount1((prev) => prev + 1);//更安全可靠的更新方式
+  }
+
+  function handleClick2() {
+    setCount2((prev) => prev + 1);//更安全可靠的更新方式
+  }
   return <>
-    <div className="b">useState</div>
-    <Counter />
-    <div className="b">useRef</div>
-    <CounterRef></CounterRef>
+    <div className="b">useState
+      <button onClick={handleClick} className="bg-blue-100 p-5">count1 {count1} </button>
+      <button onClick={handleClick2} className="bg-blue-200 p-5">count2 {count2} </button>
+      {/* 包成組件，會發現渲染只有自身而已，這寫法更好 */}
+      <Counter />
+    </div>
+
+    <div className="b">useRef
+      <CounterRef></CounterRef>
+    </div>
   </>
 
 }
+
+
 function Counter() {
   let [count, setCount] = useState(0);
 
@@ -37,8 +56,8 @@ function Counter() {
   }
 
   return (
-    <button onClick={handleClick}>
-      Clicked {count} times
+    <button onClick={handleClick} className="bg-red-200 p-5">
+      Counter Clicked {count} times
     </button>
   );
 }
