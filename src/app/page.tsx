@@ -24,6 +24,7 @@ export default function Home() {
           </li>
           <li className="mb-2">cheat sheet
             <ul className="list-disc ml-4">
+              <li><Link href={`/cheat_sheet/flex_base`}>flex base</Link></li>
               <li><Link href={`/cheat_sheet/flex`}>flex</Link></li>
               <li><Link href={`/cheat_sheet/grid`}>grid</Link></li>
             </ul>
