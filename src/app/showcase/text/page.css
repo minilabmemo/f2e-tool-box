@@ -1,0 +1,19 @@
+
+
+.text-mask{
+  background-image: url('/images/seafix.png');
+  background-size: cover;
+  background-clip:text;
+  color: transparent;
+}
+.text{
+  background-image: url('/images/seafix.png');
+  background-size: cover;
+}
+
+.mask-cover{
+  background-image: url('/images/seafix.png');
+  background-size: cover;
+background-clip:text;
+color: transparent;
+}

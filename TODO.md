@@ -14,6 +14,7 @@
 
 ## cheat sheet
 
+- [ ] flex base
 - [ ] flex
 - [ ] grid
 

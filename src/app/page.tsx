@@ -17,6 +17,7 @@ export default function Home() {
           <li className="mb-2">showcase
             <ul className="list-disc ml-4">
               <li><Link href={`/showcase/graph`}>graph</Link></li>
+              <li><Link href={`/showcase/text`}>text effect</Link></li>
               <li><Link href={`/showcase/map`}>map</Link></li>
               <li><Link href={`/showcase/waterfall`}>waterfall - Masonry layout</Link></li>
               <li><Link href={`/showcase/carousel`}>carousel</Link></li>
